@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{%block content%}
+<h1>Guestbook</h1>
+<form action="" method="POST">
+  <table>
+    {{form}}
+  </table>
+  <input type="submit" value="send" />
+</form>
+<div class="guestbook">
+  {%for entry in entries %}
+  <div class="entry">
+    <div class="header">
+      {%if entry.url%}<a href="{{entry.url}}">{%endif%}
+        <span class="nick">{{entry.nick}}</span>
+        {%if entry.url%}</a>{%endif%} 
+      wrote at
+      <span class="date">{%load humanize%}{{entry.date.date|naturalday}}</span>
+      <span class="time">{{entry.date.time}}</span>:
+    </div>
+    <div class="text">
+      {{entry.text|linebreaks}}
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{%endblock%}<>
